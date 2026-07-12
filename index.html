@@ -1,0 +1,930 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Eeman Sohail — Software Developer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy-deep:#020509;
+    --navy-mid:#071527;
+    --navy-line:#123a5c;
+    --gold:#e0a96d;
+    --gold-bright:#f0bd85;
+    --periwinkle:#a0c4ff;
+    --paper:#f5f5f5;
+    --ink:#0c1720;
+    --focus:#f0bd85;
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto;}
+    *{animation-duration:0.001ms !important; animation-iteration-count:1 !important; transition-duration:0.001ms !important;}
+  }
+
+  body{
+    margin:0;
+    background:var(--navy-deep);
+    color:var(--paper);
+    font-family:'Inter', sans-serif;
+    line-height:1.6;
+  }
+
+  h1,h2,h3{
+    font-family:'Space Grotesk', sans-serif;
+    margin:0;
+  }
+
+  .mono{font-family:'JetBrains Mono', monospace;}
+
+  a{color:inherit;}
+
+  :focus-visible{
+    outline:2px solid var(--focus);
+    outline-offset:3px;
+  }
+
+  .wrap{
+    max-width:1100px;
+    margin:0 auto;
+    padding:0 28px;
+  }
+
+  /* ---------- NAV ---------- */
+  nav{
+    position:sticky;
+    top:0;
+    z-index:50;
+    background:rgba(0,43,73,0.88);
+    backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--navy-line);
+  }
+  nav .wrap{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:16px 28px;
+  }
+  .brand{
+    font-family:'JetBrains Mono', monospace;
+    font-weight:700;
+    font-size:0.95rem;
+    letter-spacing:0.02em;
+    color:var(--gold-bright);
+  }
+  .brand span{color:var(--periwinkle);}
+  .navlinks{
+    display:flex;
+    gap:28px;
+    list-style:none;
+    margin:0;
+    padding:0;
+    font-size:0.9rem;
+  }
+  .navlinks a{
+    text-decoration:none;
+    color:var(--periwinkle);
+    transition:color 0.15s ease;
+  }
+  .navlinks a:hover{color:var(--gold-bright);}
+  @media (max-width:640px){
+    .navlinks{gap:16px; font-size:0.8rem;}
+  }
+
+  /* ---------- HERO ---------- */
+  .hero{
+    position:relative;
+    padding:100px 0 0 0;
+    overflow:hidden;
+  }
+  .hero-grid{
+    position:absolute;
+    inset:0;
+    background-image:
+      linear-gradient(rgba(160,196,255,0.05) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(160,196,255,0.05) 1px, transparent 1px);
+    background-size:42px 42px;
+    mask-image:radial-gradient(ellipse at 50% 30%, black 15%, transparent 70%);
+    pointer-events:none;
+  }
+  .eyebrow{
+    display:inline-block;
+    font-family:'JetBrains Mono', monospace;
+    font-size:0.78rem;
+    color:var(--periwinkle);
+    background:var(--navy-mid);
+    border:1px solid var(--navy-line);
+    padding:6px 12px;
+    border-radius:100px;
+    margin-bottom:22px;
+  }
+  .eyebrow .dot{
+    display:inline-block;
+    width:7px;height:7px;
+    border-radius:50%;
+    background:#4caf50;
+    margin-right:8px;
+    box-shadow:0 0 0 3px rgba(76,175,80,0.18);
+  }
+  .hero h1{
+    position:relative;
+    font-size:clamp(2.6rem, 7vw, 5rem);
+    font-weight:700;
+    line-height:1.02;
+    letter-spacing:-0.01em;
+  }
+  .hero h1 .last{color:var(--gold-bright);}
+  .hero .role{
+    position:relative;
+    margin-top:18px;
+    font-size:clamp(1rem, 2.2vw, 1.3rem);
+    color:var(--periwinkle);
+    font-weight:500;
+  }
+  .hero p.bio{
+    position:relative;
+    max-width:600px;
+    margin-top:22px;
+    color:#c9d8ee;
+    font-size:1.02rem;
+  }
+  .hero-ctas{
+    position:relative;
+    display:flex;
+    flex-wrap:wrap;
+    gap:14px;
+    margin-top:34px;
+  }
+  .btn{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    padding:13px 22px;
+    border-radius:8px;
+    text-decoration:none;
+    font-weight:600;
+    font-size:0.92rem;
+    border:1px solid transparent;
+    transition:transform 0.15s ease, background 0.15s ease;
+  }
+  .btn:hover{transform:translateY(-2px);}
+  .btn-solid{background:var(--gold-bright); color:#1c1002;}
+  .btn-solid:hover{background:var(--gold);}
+  .btn-ghost{background:transparent; border-color:var(--navy-line); color:var(--paper);}
+  .btn-ghost:hover{border-color:var(--gold-bright); color:var(--gold-bright);}
+
+  /* ---------- Taskbar signature element ---------- */
+  .taskbar-shell{
+    position:relative;
+    margin-top:56px;
+    border:1px solid var(--navy-line);
+    border-radius:14px 14px 0 0;
+    background:linear-gradient(180deg, rgba(0,59,99,0.5), rgba(0,43,73,0.2));
+    padding:22px 24px 0 24px;
+    overflow:hidden;
+  }
+  .fake-windows{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:14px;
+    margin-bottom:22px;
+  }
+  @media (max-width:760px){
+    .fake-windows{grid-template-columns:repeat(2,1fr);}
+  }
+  @media (max-width:520px){
+    .fake-windows{grid-template-columns:1fr;}
+  }
+  .fake-win{
+    border-radius:8px;
+    overflow:hidden;
+    border:1px solid rgba(255,255,255,0.08);
+    box-shadow:0 12px 24px rgba(0,0,0,0.25);
+  }
+  .fake-win .bar{
+    display:flex;
+    align-items:center;
+    gap:6px;
+    padding:8px 10px;
+    font-family:'JetBrains Mono', monospace;
+    font-size:0.68rem;
+  }
+  .fake-win .bar .tl{width:9px;height:9px;border-radius:50%;display:inline-block;}
+  .fake-win .body{padding:16px 12px; font-size:0.7rem; font-family:'JetBrains Mono', monospace; opacity:0.85;}
+
+  .taskbar{
+    display:flex;
+    align-items:center;
+    gap:14px;
+    background:#001b2e;
+    border-top:1px solid var(--navy-line);
+    border-radius:10px 10px 0 0;
+    padding:10px 18px;
+    font-family:'JetBrains Mono', monospace;
+    font-size:0.82rem;
+  }
+  .start-pill{
+    background:var(--gold-bright);
+    color:#1c1002;
+    font-weight:700;
+    padding:6px 14px;
+    border-radius:6px;
+    font-size:0.78rem;
+  }
+  .taskbar .running{
+    display:flex;
+    gap:8px;
+    flex:1;
+    overflow:hidden;
+    color:var(--periwinkle);
+  }
+  .taskbar .running span{
+    background:rgba(160,196,255,0.08);
+    padding:5px 10px;
+    border-radius:6px;
+    white-space:nowrap;
+  }
+  #clock{
+    color:#7CFC9E;
+    letter-spacing:0.03em;
+  }
+
+  /* ---------- SECTIONS ---------- */
+  section{padding:96px 0;}
+  .section-head{
+    display:flex;
+    align-items:baseline;
+    gap:14px;
+    margin-bottom:44px;
+  }
+  .section-num{
+    font-family:'JetBrains Mono', monospace;
+    color:var(--gold-bright);
+    font-size:0.85rem;
+  }
+  .section-head h2{
+    font-size:clamp(1.6rem, 3.6vw, 2.2rem);
+  }
+  .section-sub{
+    color:var(--periwinkle);
+    max-width:620px;
+    margin-top:10px;
+    font-size:0.98rem;
+  }
+
+  /* ---------- ABOUT / EDUCATION ---------- */
+  .about-grid{
+    display:grid;
+    grid-template-columns:1.1fr 1fr;
+    gap:48px;
+  }
+  @media (max-width:800px){
+    .about-grid{grid-template-columns:1fr;}
+  }
+  .about-grid p{color:#c9d8ee; font-size:1rem;}
+  .edu-list{list-style:none; margin:0; padding:0;}
+  .edu-list li{
+    border-left:2px solid var(--navy-line);
+    padding:6px 0 22px 22px;
+    position:relative;
+  }
+  .edu-list li::before{
+    content:"";
+    position:absolute;
+    left:-6px; top:8px;
+    width:10px;height:10px;
+    border-radius:50%;
+    background:var(--gold-bright);
+  }
+  .edu-list li strong{
+    display:block;
+    font-size:0.98rem;
+    color:var(--paper);
+  }
+  .edu-list li span{
+    font-family:'JetBrains Mono', monospace;
+    font-size:0.75rem;
+    color:var(--periwinkle);
+  }
+
+  /* ---------- SKILLS ---------- */
+  .term{
+    background:#00131f;
+    border:1px solid var(--navy-line);
+    border-radius:10px;
+    overflow:hidden;
+  }
+  .term .bar{
+    display:flex;
+    gap:6px;
+    padding:10px 14px;
+    background:#001b2e;
+    border-bottom:1px solid var(--navy-line);
+  }
+  .term .bar .tl{width:10px;height:10px;border-radius:50%;}
+  .term .body{
+    padding:22px 24px 26px 24px;
+    font-family:'JetBrains Mono', monospace;
+    font-size:0.9rem;
+  }
+  .term .body .line{margin-bottom:10px;}
+  .prompt{color:#7CFC9E;}
+  .skill-pills{
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px;
+    margin-top:16px;
+  }
+  .pill{
+    background:rgba(224,169,109,0.1);
+    border:1px solid rgba(224,169,109,0.35);
+    color:var(--gold-bright);
+    padding:6px 13px;
+    border-radius:6px;
+    font-size:0.82rem;
+  }
+  .pill.secondary{
+    background:rgba(160,196,255,0.06);
+    border-color:rgba(160,196,255,0.28);
+    color:var(--periwinkle);
+  }
+  .term .note{
+    margin-top:18px;
+    color:#7f93ad;
+    font-size:0.78rem;
+    font-family:'Inter',sans-serif;
+  }
+
+  /* ---------- PROJECTS ---------- */
+  .proj-grid{
+    display:grid;
+    grid-template-columns:repeat(2, 1fr);
+    gap:22px;
+  }
+  @media (max-width:760px){
+    .proj-grid{grid-template-columns:1fr;}
+  }
+  .win{
+    border-radius:10px;
+    overflow:hidden;
+    border:1px solid var(--navy-line);
+    background:var(--navy-mid);
+    display:flex;
+    flex-direction:column;
+    transition:transform 0.18s ease, box-shadow 0.18s ease;
+  }
+  .win:hover{
+    transform:translateY(-4px);
+    box-shadow:0 16px 30px rgba(0,0,0,0.3);
+  }
+  .win .titlebar{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    padding:10px 14px;
+  }
+  .win .titlebar .dots{display:flex; gap:6px;}
+  .win .titlebar .dots span{width:10px;height:10px;border-radius:50%; display:inline-block;}
+  .win .titlebar .fname{
+    font-family:'JetBrains Mono', monospace;
+    font-size:0.76rem;
+    margin-left:4px;
+    opacity:0.9;
+  }
+  .win .content{
+    padding:18px 20px 22px 20px;
+  }
+  .win h3{
+    font-size:1.08rem;
+    margin-bottom:8px;
+  }
+  .win p{
+    color:#c9d8ee;
+    font-size:0.92rem;
+    margin:0 0 14px 0;
+  }
+  .tags{
+    display:flex;
+    flex-wrap:wrap;
+    gap:7px;
+  }
+  .tag{
+    font-family:'JetBrains Mono', monospace;
+    font-size:0.7rem;
+    padding:4px 9px;
+    border-radius:5px;
+    background:rgba(255,255,255,0.06);
+    color:var(--periwinkle);
+    border:1px solid rgba(255,255,255,0.08);
+  }
+
+  /* ---------- CONTACT ---------- */
+  .contact-panel{
+    border:1px solid var(--navy-line);
+    background:var(--navy-mid);
+    border-radius:14px;
+    padding:44px;
+    display:grid;
+    grid-template-columns:1fr auto;
+    align-items:center;
+    gap:30px;
+  }
+  @media (max-width:700px){
+    .contact-panel{grid-template-columns:1fr; text-align:left;}
+  }
+  .contact-panel h2{font-size:clamp(1.5rem,3.4vw,2rem);}
+  .contact-panel p{color:var(--periwinkle); margin-top:10px; max-width:440px;}
+  .contact-links{
+    display:flex;
+    flex-direction:column;
+    gap:12px;
+    font-family:'JetBrains Mono', monospace;
+    font-size:0.9rem;
+  }
+  .contact-links a{
+    text-decoration:none;
+    color:var(--paper);
+    display:flex;
+    align-items:center;
+    gap:10px;
+    padding:10px 16px;
+    border:1px solid var(--navy-line);
+    border-radius:8px;
+    transition:border-color 0.15s ease, color 0.15s ease;
+  }
+  .contact-links a:hover{border-color:var(--gold-bright); color:var(--gold-bright);}
+
+  footer{
+    padding:36px 0 50px 0;
+    text-align:center;
+    color:#5f7896;
+    font-family:'JetBrains Mono', monospace;
+    font-size:0.78rem;
+  }
+
+  /* ---------- STARFIELD BACKGROUND ---------- */
+  .stars{
+    position:fixed;
+    inset:0;
+    z-index:-1;
+    overflow:hidden;
+    background:
+      radial-gradient(ellipse at 20% 15%, rgba(160,196,255,0.06), transparent 55%),
+      radial-gradient(ellipse at 80% 70%, rgba(224,169,109,0.05), transparent 55%),
+      var(--navy-deep);
+  }
+  .star{
+    position:absolute;
+    top:var(--y);
+    left:var(--x);
+    width:var(--s);
+    height:var(--s);
+    border-radius:50%;
+    background:#fff;
+    opacity:0.75;
+    animation:twinkle var(--dur) ease-in-out infinite;
+    animation-delay:var(--delay);
+  }
+  .star.big{
+    box-shadow:0 0 7px 1.5px rgba(255,255,255,0.9), 0 0 14px 4px rgba(160,196,255,0.4);
+  }
+  @keyframes twinkle{
+    0%, 100%{ opacity:0.2; transform:scale(0.8); }
+    50%{ opacity:1; transform:scale(1.2); }
+  }
+  .shooting-star{
+    position:absolute;
+    top:var(--sy);
+    left:var(--sx);
+    width:2px;
+    height:2px;
+    background:#fff;
+    border-radius:50%;
+    box-shadow:0 0 6px 2px rgba(255,255,255,0.9);
+    animation:shoot var(--sdur) linear infinite;
+    animation-delay:var(--sdelay);
+    opacity:0;
+  }
+  @keyframes shoot{
+    0%{ opacity:0; transform:translate(0,0); }
+    3%{ opacity:1; }
+    18%{ opacity:0; transform:translate(-260px, 260px); }
+    100%{ opacity:0; transform:translate(-260px, 260px); }
+  }
+  @media (prefers-reduced-motion: reduce){
+    .star, .shooting-star{ animation:none; opacity:0.5; }
+  }
+
+  /* ---------- ROTATING ROLE / TITLES ---------- */
+  .hero .role{
+    display:flex;
+    align-items:baseline;
+    flex-wrap:wrap;
+    gap:8px;
+    min-height:1.6em;
+  }
+  .role-prefix{color:var(--periwinkle);}
+  .role-typed{
+    color:var(--gold-bright);
+    font-weight:600;
+    font-family:'JetBrains Mono', monospace;
+    font-size:0.95em;
+  }
+  .role-cursor{
+    display:inline-block;
+    width:2px;
+    margin-left:2px;
+    background:var(--gold-bright);
+    animation:blink 0.9s step-end infinite;
+  }
+  @keyframes blink{
+    0%, 100%{ opacity:1; }
+    50%{ opacity:0; }
+  }
+</style>
+</head>
+<body>
+
+<div class="stars" id="starfield"></div>
+
+<nav>
+  <div class="wrap">
+    <div class="brand">eeman<span>@</span>sohail</div>
+    <ul class="navlinks">
+      <li><a href="#about">About</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="hero-grid"></div>
+  <div class="wrap">
+    <div class="eyebrow"><span class="dot"></span>open to opportunities</div>
+    <h1>Eeman <span class="last">Sohail</span></h1>
+    <div class="role">
+      <span class="role-prefix">I'm an</span>
+      <span class="role-typed" id="roleTyped"></span><span class="role-cursor" id="roleCursor">&nbsp;</span>
+    </div>
+    <p class="bio">I build small, complete desktop applications — the kind with a real interface, real error handling, and data that survives a restart. Everything below started as a Tkinter window and a blank file.</p>
+    <div class="hero-ctas">
+      <a class="btn btn-solid" href="mailto:eeman11874@gmail.com">Email me</a>
+      <a class="btn btn-ghost" href="https://github.com/eemansohail" target="_blank" rel="noopener">View GitHub</a>
+      <a class="btn btn-ghost" href="#projects">See projects</a>
+    </div>
+
+    <div class="taskbar-shell">
+      <div class="fake-windows">
+        <div class="fake-win">
+          <div class="bar" style="background:#0d1117;">
+            <span class="tl" style="background:#ff5f57;"></span><span class="tl" style="background:#febc2e;"></span><span class="tl" style="background:#28c840;"></span>
+            <span style="color:#8b949e;">clock.py</span>
+          </div>
+          <div class="body" style="background:#0d1117; color:#00e676;">14:32:07</div>
+        </div>
+        <div class="fake-win">
+          <div class="bar" style="background:#002b49;">
+            <span class="tl" style="background:#ff5f57;"></span><span class="tl" style="background:#febc2e;"></span><span class="tl" style="background:#28c840;"></span>
+            <span style="color:#a0c4ff;">quiz.py</span>
+          </div>
+          <div class="body" style="background:#002b49; color:#e0a96d;">Score: 8/10</div>
+        </div>
+        <div class="fake-win">
+          <div class="bar" style="background:#1e1e1e;">
+            <span class="tl" style="background:#ff5f57;"></span><span class="tl" style="background:#febc2e;"></span><span class="tl" style="background:#28c840;"></span>
+            <span style="color:#a5a5a5;">calc.py</span>
+          </div>
+          <div class="body" style="background:#1e1e1e; color:#fff;">12 × 7 = 84</div>
+        </div>
+      </div>
+      <div class="taskbar">
+        <span class="start-pill">EEMAN</span>
+        <span class="running">
+          <span>calculator.py</span><span>quiz_project.py</span><span>weather_tracker.py</span>
+        </span>
+        <span id="clock" class="mono">00:00:00</span>
+      </div>
+    </div>
+  </div>
+</header>
+
+<section id="about">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="section-num mono">01</span>
+      <h2>About</h2>
+    </div>
+    <div class="about-grid">
+      <div>
+        <p>I'm a student developer based in Multan, Pakistan, currently focused on Python, with C++ and HTML rounding out my foundation. Most of what I build are desktop utilities — a calculator, a contact book, a small library system — the kind of programs that force you to actually finish the boring parts: input validation, saved data, an interface that doesn't break when someone clicks the wrong thing twice.</p>
+        <p style="margin-top:16px;">I like projects small enough to complete end to end, and I've been using that constraint to slowly work up to bigger, multi-file systems.</p>
+      </div>
+      <div>
+        <h3 style="font-size:1rem; color:var(--periwinkle); margin-bottom:18px; font-family:'JetBrains Mono', monospace; text-transform:uppercase; letter-spacing:0.04em;">Education</h3>
+        <ul class="edu-list">
+          <li><strong>Fazaia Degree College</strong><span>Karachi</span></li>
+          <li><strong>Fazaia Inter College</strong><span>Islamabad</span></li>
+          <li><strong>Larose High School</strong><span>Multan</span></li>
+          <li><strong>Muslim Girls College</strong><span>Multan</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="skills">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="section-num mono">02</span>
+      <h2>Skills</h2>
+    </div>
+    <div class="term">
+      <div class="bar">
+        <span class="tl" style="background:#ff5f57;"></span><span class="tl" style="background:#febc2e;"></span><span class="tl" style="background:#28c840;"></span>
+      </div>
+      <div class="body">
+        <div class="line"><span class="prompt">$</span> whoami --skills</div>
+        <div class="skill-pills">
+          <span class="pill">Python</span>
+          <span class="pill">C++</span>
+          <span class="pill">HTML</span>
+        </div>
+        <div class="line" style="margin-top:22px;"><span class="prompt">$</span> whoami --tools-used-in-projects</div>
+        <div class="skill-pills">
+          <span class="pill secondary">Tkinter</span>
+          <span class="pill secondary">JSON persistence</span>
+          <span class="pill secondary">REST APIs</span>
+          <span class="pill secondary">Git &amp; GitHub</span>
+        </div>
+        <p class="note">Core skills as listed by Eeman, with tools observed in her project code shown separately below.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="projects">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="section-num mono">03</span>
+      <h2>Projects</h2>
+    </div>
+    <p class="section-sub" style="margin-top:-28px; margin-bottom:36px;">Eleven small applications, each its own open window below — click GitHub to browse the source.</p>
+
+    <div class="proj-grid">
+
+      <div class="win">
+        <div class="titlebar" style="background:#1e1e1e;">
+          <div class="dots"><span style="background:#ff5f57;"></span><span style="background:#febc2e;"></span><span style="background:#28c840;"></span></div>
+          <span class="fname" style="color:#00e676;">ai_chatbot.py</span>
+        </div>
+        <div class="content">
+          <h3>AI Chatbot</h3>
+          <p>A Tkinter chat window backed by the Anthropic API, holding full conversation history for context across turns. API calls run on a background thread so the UI never freezes, with color-coded messages and clear error handling if a request fails.</p>
+          <div class="tags"><span class="tag">Python</span><span class="tag">Tkinter</span><span class="tag">API</span></div>
+        </div>
+      </div>
+
+      <div class="win">
+        <div class="titlebar" style="background:#002b49;">
+          <div class="dots"><span style="background:#ff5f57;"></span><span style="background:#febc2e;"></span><span style="background:#28c840;"></span></div>
+          <span class="fname" style="color:#a0c4ff;">quiz_project.py</span>
+        </div>
+        <div class="content">
+          <h3>Let's Test Knowledge</h3>
+          <p>A five-category quiz app — General, Capitals, Country Areas, Animals, and Islamic Studies — with a navy-and-gold interface, live scoring, and a results screen. The look this whole site borrows its palette from.</p>
+          <div class="tags"><span class="tag">Python</span><span class="tag">Tkinter</span><span class="tag">multi-screen</span></div>
+        </div>
+      </div>
+
+      <div class="win">
+        <div class="titlebar" style="background:#4a90d9;">
+          <div class="dots"><span style="background:#ff5f57;"></span><span style="background:#febc2e;"></span><span style="background:#28c840;"></span></div>
+          <span class="fname" style="color:#fff;">weather_tracker.py</span>
+        </div>
+        <div class="content">
+          <h3>Weather Tracker</h3>
+          <p>Looks up live conditions for any city through the OpenWeatherMap API — temperature, feels-like, humidity, and wind — with a °C/°F toggle and clear handling for invalid cities or connection errors.</p>
+          <div class="tags"><span class="tag">Python</span><span class="tag">Tkinter</span><span class="tag">API</span></div>
+        </div>
+      </div>
+
+      <div class="win">
+        <div class="titlebar" style="background:#1e1e1e;">
+          <div class="dots"><span style="background:#ff5f57;"></span><span style="background:#febc2e;"></span><span style="background:#28c840;"></span></div>
+          <span class="fname" style="color:#a5a5a5;">calculator_gui.py</span>
+        </div>
+        <div class="content">
+          <h3>GUI Calculator</h3>
+          <p>A dark-themed Tkinter calculator with a real keypad layout, keyboard shortcuts, backspace, and percentage handling — safe expression evaluation instead of a raw eval on user input.</p>
+          <div class="tags"><span class="tag">Python</span><span class="tag">Tkinter</span><span class="tag">UI</span></div>
+        </div>
+      </div>
+
+      <div class="win">
+        <div class="titlebar" style="background:#f4f4f4;">
+          <div class="dots"><span style="background:#ff5f57;"></span><span style="background:#febc2e;"></span><span style="background:#28c840;"></span></div>
+          <span class="fname" style="color:#555;">contact_book.py</span>
+        </div>
+        <div class="content">
+          <h3>Contact Book</h3>
+          <p>Add, search, edit, and delete contacts through a table view, with live search-as-you-type filtering and data saved to a local JSON file between sessions.</p>
+          <div class="tags"><span class="tag">Python</span><span class="tag">Tkinter</span><span class="tag">JSON</span></div>
+        </div>
+      </div>
+
+      <div class="win">
+        <div class="titlebar" style="background:#0d1117;">
+          <div class="dots"><span style="background:#ff5f57;"></span><span style="background:#febc2e;"></span><span style="background:#28c840;"></span></div>
+          <span class="fname" style="color:#8b949e;">digital_clock.py</span>
+        </div>
+        <div class="content">
+          <h3>Digital Clock</h3>
+          <p>A live-updating clock and date display in a distraction-free dark window, refreshing every second without blocking the interface.</p>
+          <div class="tags"><span class="tag">Python</span><span class="tag">Tkinter</span><span class="tag">real-time</span></div>
+        </div>
+      </div>
+
+      <div class="win">
+        <div class="titlebar" style="background:#f4f4f4;">
+          <div class="dots"><span style="background:#ff5f57;"></span><span style="background:#febc2e;"></span><span style="background:#28c840;"></span></div>
+          <span class="fname" style="color:#555;">expense_tracker.py</span>
+        </div>
+        <div class="content">
+          <h3>Expense Tracker</h3>
+          <p>Logs dated, categorized expenses with a running total and a category filter, validating both dates and amounts before anything is saved to disk.</p>
+          <div class="tags"><span class="tag">Python</span><span class="tag">Tkinter</span><span class="tag">JSON</span></div>
+        </div>
+      </div>
+
+      <div class="win">
+        <div class="titlebar" style="background:#f4f4f4;">
+          <div class="dots"><span style="background:#ff5f57;"></span><span style="background:#febc2e;"></span><span style="background:#28c840;"></span></div>
+          <span class="fname" style="color:#555;">library_MS.py</span>
+        </div>
+        <div class="content">
+          <h3>Library Management System</h3>
+          <p>Tabbed interface for managing books, members, and borrowing records, with a 14-day loan period tracked automatically across linked JSON files.</p>
+          <div class="tags"><span class="tag">Python</span><span class="tag">Tkinter</span><span class="tag">multi-file</span></div>
+        </div>
+      </div>
+
+      <div class="win">
+        <div class="titlebar" style="background:#1e1e2e;">
+          <div class="dots"><span style="background:#ff5f57;"></span><span style="background:#febc2e;"></span><span style="background:#28c840;"></span></div>
+          <span class="fname" style="color:#ccc;">rock_paper_scissor.py</span>
+        </div>
+        <div class="content">
+          <h3>Rock · Paper · Scissors</h3>
+          <p>Play against the computer with emoji move displays and a running scoreboard for wins, losses, and ties, plus a one-click reset.</p>
+          <div class="tags"><span class="tag">Python</span><span class="tag">Tkinter</span><span class="tag">game</span></div>
+        </div>
+      </div>
+
+      <div class="win">
+        <div class="titlebar" style="background:#f4f4f4;">
+          <div class="dots"><span style="background:#ff5f57;"></span><span style="background:#febc2e;"></span><span style="background:#28c840;"></span></div>
+          <span class="fname" style="color:#555;">student_management_system.py</span>
+        </div>
+        <div class="content">
+          <h3>Student Management System</h3>
+          <p>Tracks student records, grades, and attendance across a tabbed layout, with each dataset persisted to its own JSON file.</p>
+          <div class="tags"><span class="tag">Python</span><span class="tag">Tkinter</span><span class="tag">multi-file</span></div>
+        </div>
+      </div>
+
+      <div class="win">
+        <div class="titlebar" style="background:#f4f4f4;">
+          <div class="dots"><span style="background:#ff5f57;"></span><span style="background:#febc2e;"></span><span style="background:#28c840;"></span></div>
+          <span class="fname" style="color:#555;">unit_converter.py</span>
+        </div>
+        <div class="content">
+          <h3>Unit Converter</h3>
+          <p>Converts between temperature, weight, and length units with a category-aware dropdown and a one-click unit swap.</p>
+          <div class="tags"><span class="tag">Python</span><span class="tag">Tkinter</span><span class="tag">math</span></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="section-num mono">04</span>
+      <h2>Contact</h2>
+    </div>
+    <div class="contact-panel">
+      <div>
+        <h2>Let's build something.</h2>
+        <p>Open to internships, collaborations, and anyone who wants to talk through a project idea.</p>
+      </div>
+      <div class="contact-links">
+        <a href="mailto:eeman11874@gmail.com">✉ eeman11874@gmail.com</a>
+        <a href="tel:03333637525">☎ 0333 3637525</a>
+        <a href="https://github.com/eemansohail" target="_blank" rel="noopener">⌥ github.com/eemansohail</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  built by eeman sohail — © <span id="year"></span>
+</footer>
+
+<script>
+  function pad(n){ return n.toString().padStart(2,'0'); }
+  function tickClock(){
+    const now = new Date();
+    document.getElementById('clock').textContent =
+      pad(now.getHours()) + ':' + pad(now.getMinutes()) + ':' + pad(now.getSeconds());
+  }
+  tickClock();
+  setInterval(tickClock, 1000);
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  // ---------- Generate the starfield ----------
+  (function buildStarfield(){
+    const field = document.getElementById('starfield');
+    const count = window.innerWidth < 700 ? 130 : 260;
+    for (let i = 0; i < count; i++){
+      const star = document.createElement('div');
+      const big = Math.random() < 0.16;
+      star.className = 'star' + (big ? ' big' : '');
+      star.style.setProperty('--x', Math.random() * 100 + '%');
+      star.style.setProperty('--y', Math.random() * 100 + '%');
+      const size = big ? (2 + Math.random() * 1.8) : (0.7 + Math.random() * 1.5);
+      star.style.setProperty('--s', size + 'px');
+      star.style.setProperty('--dur', (2 + Math.random() * 4) + 's');
+      star.style.setProperty('--delay', (Math.random() * 5) + 's');
+      field.appendChild(star);
+    }
+    // a handful of shooting stars for extra shine
+    const shootingCount = window.innerWidth < 700 ? 3 : 6;
+    for (let i = 0; i < shootingCount; i++){
+      const s = document.createElement('div');
+      s.className = 'shooting-star';
+      s.style.setProperty('--sx', (20 + Math.random() * 60) + '%');
+      s.style.setProperty('--sy', (Math.random() * 40) + '%');
+      s.style.setProperty('--sdur', (6 + Math.random() * 6) + 's');
+      s.style.setProperty('--sdelay', (Math.random() * 10) + 's');
+      field.appendChild(s);
+    }
+  })();
+
+  // ---------- Rotating job titles (typewriter) ----------
+  (function typewriterTitles(){
+    const titles = [
+      'Aspiring Software Developer',
+      'Python Developer',
+      'C++ Programmer',
+      'Desktop App Developer'
+    ];
+    const el = document.getElementById('roleTyped');
+    if (!el) return;
+
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (reduceMotion){
+      el.textContent = titles[0];
+      return;
+    }
+
+    let titleIndex = 0, charIndex = 0, deleting = false;
+    const typeSpeed = 65, deleteSpeed = 35, holdTime = 1500, gapTime = 400;
+
+    function tick(){
+      const current = titles[titleIndex];
+      if (!deleting){
+        charIndex++;
+        el.textContent = current.slice(0, charIndex);
+        if (charIndex === current.length){
+          deleting = true;
+          setTimeout(tick, holdTime);
+          return;
+        }
+        setTimeout(tick, typeSpeed);
+      } else {
+        charIndex--;
+        el.textContent = current.slice(0, charIndex);
+        if (charIndex === 0){
+          deleting = false;
+          titleIndex = (titleIndex + 1) % titles.length;
+          setTimeout(tick, gapTime);
+          return;
+        }
+        setTimeout(tick, deleteSpeed);
+      }
+    }
+    tick();
+  })();
+</script>
+
+</body>
+</html>
